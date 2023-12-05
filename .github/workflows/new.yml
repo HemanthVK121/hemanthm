@@ -1,29 +1,21 @@
+name: Deploy to EC2
+
 on:
   push:
     branches:
       - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-
-      - name: Create Sample Text File
-        run: echo "Hello from GitHub Actions!" > example.txt
-
-      - name: Display File Content
-        run: cat example.txt
-
-      - name: Connect to Server and Transfer File
-        uses: appleboy/ssh-action@master
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ 172.31.26.99 }}
-          username: ${{ ubuntu }}
-          key: ${{ /root/.ssh/id.rsa }}
-          port: ${{ 80 }}
-          script: |
-            echo "Transferring example.txt to the server."
-            scp -i ${{ /root/.ssh/id.rsa }} -P ${{ 80 }} example.txt ${{ ubuntu }}@${{ 172.31.26.99 }}:~/example.txt
+          host: ${{ secrets.SSH_HOST- }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: touch  new
