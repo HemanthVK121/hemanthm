@@ -20,10 +20,10 @@ jobs:
       - name: Connect to Server and Transfer File
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.3.80.60.37 }}
+          host: ${{ secrets.172.31.26.99 }}
           username: ${{ secrets.ubuntu }}
           key: ${{ secrets./root/.ssh/id.rsa }}
           port: ${{ secrets.80 }}
           script: |
             echo "Transferring example.txt to the server."
-            scp -i ${{ secrets./root/.ssh/id.rsa }} -P ${{ secrets.80 }} example.txt ${{ secrets.ubuntu }}@${{ secrets.3.80.60.37 }}:~/example.txt
+            scp -i ${{ secrets./root/.ssh/id.rsa }} -P ${{ secrets.80 }} example.txt ${{ secrets.ubuntu }}@${{ secrets.172.31.26.99 }}:~/example.txt
